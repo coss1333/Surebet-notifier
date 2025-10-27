@@ -1,0 +1,41 @@
+Пошаговая инструкция — Surebet Notifier (Telegram)
+==================================================
+
+1) Установите Python 3.10+.
+2) Скачайте архив `surebet_notifier.zip` (см. ссылку из чата) и распакуйте его.
+3) Создайте виртуальное окружение и активируйте его.
+   - Windows (PowerShell):
+     python -m venv .venv
+     . .venv\Scripts\Activate.ps1
+   - Linux/macOS:
+     python -m venv .venv
+     source .venv/bin/activate
+
+4) Установите зависимости:
+   pip install -r requirements.txt
+
+5) Создайте файл .env на основе .env.example и заполните:
+   - TELEGRAM_BOT_TOKEN
+   - TELEGRAM_CHAT_ID
+   - ODDS_API_KEY
+   Остальные параметры можно оставить по умолчанию или настроить под себя.
+
+6) Запуск:
+   - Windows (PowerShell):
+     .\run.ps1
+     (или загрузите .env в процесс и выполните: python main.py)
+   - Linux/macOS:
+     ./run.sh
+     (или: export $(grep -v '^#' .env | xargs) && python main.py)
+
+7) Проверьте Telegram-чат: при появлении арбитража придёт сообщение с:
+   - матчем, временем начала;
+   - выбранными букмекерами и коэффициентами;
+   - Edge и Σ(1/odds);
+   - долями ставок и ожидаемой фиксированной прибылью для BANK_SAMPLE.
+
+Примечания:
+- Получить ODDS_API_KEY: https://the-odds-api.com/
+- Добавьте бота в чат/канал и узнайте chat_id (бот должен иметь право писать).
+- Для реальных ставок учитывайте комиссии, лимиты и задержки обновления линий.
+- Порог ARB_MIN_EDGE увеличивайте для фильтрации «тонких» ситуаций.
